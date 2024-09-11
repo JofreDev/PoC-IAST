@@ -14,3 +14,5 @@ include ':usecase'
 project(':app-service').projectDir = file('./applications/app-service')
 project(':model').projectDir = file('./domain/model')
 project(':usecase').projectDir = file('./domain/usecase')
+include ':iast-pattern-config'
+project(':iast-pattern-config').projectDir = file('./infrastructure/driven-adapters/iast-pattern-config')
