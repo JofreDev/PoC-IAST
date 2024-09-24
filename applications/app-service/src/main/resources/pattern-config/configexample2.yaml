@@ -1,0 +1,197 @@
+name: example2
+requestModel:
+  #Header
+  - type: CONSTANT                    #IdAplServidor
+    constant: 'DM4'
+    length: 3
+  - attribute: consumer               #IdAplCliente  (Homologado del CMSTI Catalog)
+    length: 3
+    type: VALUE
+  - attribute: headers.message-id     #IdMensaje
+    length: 16
+    type: EXPRESSION
+    expression: "#value.length() > 16 ? #value.substring(0, 16) : #value"
+  - type: CONSTANT                    #NomDqRespu y LibDqRespu
+    constant: ''
+    length: 20
+  - type: CONSTANT                    #OrientaMsg
+    constant: '1'
+    length: 1
+  - type: CONSTANT                    #Temporizador
+    constant: '10'
+    length: 2
+  - type: CONSTANT                    #HoraEnvSrvMQ, HoraRecSrvMQ, HoraLleSrvMQ y HoraResSrvMQ
+    constant: ''
+    length: 32
+  - type: CONSTANT                    #LongCargaUtil
+    constant: '01066'
+    length: 5
+  - type: CONSTANT                    #TotalSeFgmento
+    constant: '01'
+    length: 2
+  - type: CONSTANT                    #PosSegmento
+    constant: ''
+    length: 5
+  - type: CONSTANT                    #IndErrCom
+    constant: ''
+    length: 1
+  - type: CONSTANT                    #TipoMensaje
+    constant: 'TS'
+    length: 2
+  - type: CONSTANT                    #CodigoTrn
+    constant: '0015'
+    length: 4
+  - type: GENERATED                    #SecuenciaTrn
+    length: 20
+    expression: "T(java.time.ZonedDateTime).now(T(java.time.ZoneId).of('America/Bogota')).format(T(java.time.format.DateTimeFormatter).ofPattern('yyyyMMddHHmmssSSSSSS'))"
+  - type: CONSTANT                    #RequiereResp
+    constant: 'S'
+    length: 1
+  - type: CONSTANT                    #CodigoRespu
+    constant: '0000'
+    length: 4
+  - type: CONSTANT                    #DescriRespu
+    constant: ''
+    length: 50
+  - type: CONSTANT                    #Filler
+    constant: ''
+    length: 9
+
+    ### body
+
+  - attribute: firstName                #UserName
+    length: 10
+    type: VALUE
+  - attribute: lastName                #LastName
+    length: 10
+    type: VALUE
+  - attribute: gender                   #gender
+    length: 10
+    type: VALUE
+  #- attribute: age                      #age
+  #  length: 3
+  #  type: VALUE
+  - attribute: phoneNumbers.0.type                   #gender
+    type: VALUE
+    length: 10
+  - attribute: phoneNumbers.1.type                   #gender
+    type: VALUE
+    length: 10
+
+  - attribute: cedulas                   #gender
+    length: 150
+    type: ARRAY
+    fillDirection: LEFT
+    expression: "$.[*]"
+    arrayValue:
+      attribute : " "
+      type: VALUE
+      fillValue: ' '
+      fillDirection: LEFT
+      length: 15
+
+  - attribute: phoneNumbers                   #gender
+    length: 80
+    type: ARRAY
+    fillDirection: LEFT
+    expression: "$.[*].type"
+    arrayValue:
+      attribute: " "
+      type: VALUE
+      length: 11
+
+
+responseModels:
+  - attribute: data.usuario.id # Id usuario
+    initPosition: 0
+    length: 9
+    type: VALUE
+
+  - attribute: data.usuario.nombre
+    initPosition: 9
+    length: 10
+    type: VALUE
+
+  - attribute: data.usuario.direccion # Id usuario
+    initPosition: 19
+    length: 17
+    type: VALUE
+
+  - attribute: data.usuario.telefono # Id usuario
+    initPosition: 36
+    length: 16
+    type: VALUE
+
+  - attribute: data.usuario.email # Id usuario
+    initPosition: 52
+    length: 21
+    type: VALUE
+
+  - attribute: data.productosBancarios.0.tipoProducto
+    initPosition: 74
+    length: 21
+    type: VALUE
+  - attribute: data.productosBancarios.0.numeroCuenta
+    initPosition: 95
+    length: 15
+    type: VALUE
+    ### Mostrar el ejemplo de un caso numerico !!
+  - attribute: data.productosBancarios.0.saldo
+    initPosition: 110
+    length: 6
+    type: VALUE
+
+  - attribute: data.productosBancarios.0.transacciones
+    initPosition: 116
+    length: 55
+    limit : 2
+    type: ARRAY
+    subAttributes:
+      - attribute: fecha
+        initPosition: 0
+        length: 10
+        type: VALUE
+      - attribute: monto
+        initPosition: 10
+        length: 6
+        type: VALUE
+      - attribute: tipo
+        initPosition: 16
+        length: 11
+        type: VALUE
+
+  - attribute: data.productosBancarios.1.tipoProducto
+    initPosition: 170
+    length: 21
+    type: VALUE
+  - attribute: data.productosBancarios.1.numeroCuenta
+    initPosition: 191
+    length: 15
+    type: VALUE
+    ### Mostrar el ejemplo de un caso numerico !!
+  - attribute: data.productosBancarios.1.saldo
+    initPosition: 206
+    length: 6
+    type: VALUE
+  - attribute: data.productosBancarios.1.transacciones
+    initPosition: 212
+    length: 55
+    limit: 2
+    type: ARRAY
+    subAttributes:
+      - attribute: fecha
+        initPosition: 0
+        length: 10
+        type: VALUE
+      - attribute: monto
+        initPosition: 10
+        length: 6
+        type: VALUE
+      - attribute: tipo
+        initPosition: 16
+        length: 11
+        type: VALUE
+
+
+
+

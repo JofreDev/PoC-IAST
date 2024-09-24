@@ -2,4 +2,8 @@ dependencies {
     implementation project(':model')
     implementation 'org.springframework:spring-context'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'com.jayway.jsonpath:json-path:2.4.0'
+
 }
