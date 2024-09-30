@@ -14,7 +14,6 @@ public class ExpressionUtils {
 
     public static final String VALUE = "value";
 
-    // Valor a evaluar y expresión evaluadora correspondiente usando Spring Expression Language
     public static String getExpressionValue(String value, String expression) {
         var expressionParser = new SpelExpressionParser();
         var context = new StandardEvaluationContext();

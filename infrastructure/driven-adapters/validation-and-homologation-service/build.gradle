@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework:spring-context'
+    implementation 'co.com.bancolombia:peq:2.0.0'
+    implementation 'co.com.bancolombia:spr:1.0.1'
+    implementation 'co.com.bancolombia:policy-manager-async:0.1.2'
+    testImplementation 'io.projectreactor.tools:blockhound:1.0.9.RELEASE'
+    testImplementation 'io.projectreactor.tools:blockhound-junit-platform:1.0.8.RELEASE'
+}

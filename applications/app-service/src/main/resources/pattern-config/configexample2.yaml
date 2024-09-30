@@ -94,11 +94,12 @@ requestModel:
     length: 80
     type: ARRAY
     fillDirection: LEFT
-    expression: "$.[*].type"
+    expression: "$.[*].typeie"
     arrayValue:
       attribute: " "
-      type: VALUE
-      length: 11
+      type: EXPRESSION
+      expression: "#value == 'home' ? true : false"
+      length: 5
 
 
 responseModels:

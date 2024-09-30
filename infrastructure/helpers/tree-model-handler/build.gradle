@@ -1,6 +1,0 @@
-dependencies {
-    implementation project(':model')
-    implementation 'org.springframework:spring-context'
-    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
-}

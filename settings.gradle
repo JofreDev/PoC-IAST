@@ -1,7 +1,6 @@
 pluginManagement {
     repositories {
-        //mavenLocal()
-        //maven { url '...' }
+        maven { url "https://artifactory.apps.bancolombia.com/maven-bancolombia" }
         gradlePluginPortal()
     }
 }
@@ -16,7 +15,7 @@ project(':model').projectDir = file('./domain/model')
 project(':usecase').projectDir = file('./domain/usecase')
 include ':iast-pattern-config'
 project(':iast-pattern-config').projectDir = file('./infrastructure/driven-adapters/iast-pattern-config')
-include ':tree-model-handler'
-project(':tree-model-handler').projectDir = file('./infrastructure/helpers/tree-model-handler')
 include ':reactive-web'
 project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
+include ':validation-and-homologation-service'
+project(':validation-and-homologation-service').projectDir = file('./infrastructure/driven-adapters/validation-and-homologation-service')

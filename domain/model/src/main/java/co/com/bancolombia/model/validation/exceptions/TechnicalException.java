@@ -5,15 +5,16 @@ import lombok.Getter;
 
 @Getter
 public class TechnicalException extends RuntimeException {
-    private final TechnicalErrorMessage errorMessage;
 
-    public TechnicalException(TechnicalErrorMessage errorMessage) {
-        super(errorMessage.getMessage());
-        this.errorMessage = errorMessage;
+    private final TechnicalErrorMessage technicalErrorMessage;
+
+    public TechnicalException(TechnicalErrorMessage technicalErrorMessage) {
+        super(technicalErrorMessage.getMessage());
+        this.technicalErrorMessage = technicalErrorMessage;
     }
 
-    public TechnicalException(TechnicalErrorMessage errorMessage, Throwable cause) {
-        super(errorMessage.getMessage(), cause);
-        this.errorMessage = errorMessage;
+    public TechnicalException(TechnicalErrorMessage technicalErrorMessage, Throwable cause) {
+        super(technicalErrorMessage.getMessage(), cause);
+        this.technicalErrorMessage = technicalErrorMessage;
     }
 }

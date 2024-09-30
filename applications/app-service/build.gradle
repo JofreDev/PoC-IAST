@@ -1,8 +1,8 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+	implementation project(':validation-and-homologation-service')
 	implementation project(':reactive-web')
-	implementation project(':tree-model-handler')
 	implementation project(':iast-pattern-config')
     implementation project(':model')
     implementation project(':usecase')

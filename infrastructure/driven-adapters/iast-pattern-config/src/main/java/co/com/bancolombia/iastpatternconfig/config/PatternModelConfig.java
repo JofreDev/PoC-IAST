@@ -37,7 +37,7 @@ public class PatternModelConfig {
 
         try (Stream<Path> stream = Files.walk(Paths.get(configFiles), MAX_DEPTH)) {
             return stream
-                    //.parallel()
+                    .parallel()
                     .filter(Files::isRegularFile)
                     .filter(p -> p.getFileName().toString().endsWith(".yaml"))
                     .map(path -> getConfigModel(path, mapper))

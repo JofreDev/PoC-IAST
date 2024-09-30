@@ -86,7 +86,7 @@ requestModel:
     arrayValue:
       attribute : " "
       type: VALUE
-      fillValue: ' '
+      fillValue: '0'
       fillDirection: LEFT
       length: 15
 

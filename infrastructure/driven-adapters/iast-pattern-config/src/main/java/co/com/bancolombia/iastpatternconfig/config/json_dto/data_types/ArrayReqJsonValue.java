@@ -12,14 +12,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import net.minidev.json.JSONArray;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static co.com.bancolombia.iastpatternconfig.config.utils.JsonPathExpressionsUtils.getJsonExpressionValue;
 import static co.com.bancolombia.iastpatternconfig.config.utils.JsonUtils.*;
 import static co.com.bancolombia.iastpatternconfig.config.utils.Type.ARRAY;
 import static co.com.bancolombia.model.validation.ValidationService.validate;
 
+@Slf4j
 @Getter
 public class ArrayReqJsonValue extends ReqJsonValue {
 
@@ -69,28 +74,24 @@ public class ArrayReqJsonValue extends ReqJsonValue {
 
     // Falta logica, hay que hacer switch interno
 
-    @SneakyThrows
+    //@SneakyThrows
     private String buildStringFromArray(JsonNode jsonArrayNode, String expression) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-
-        String jsonAsString = objectMapper.writeValueAsString(jsonArrayNode);
-        //var consultationResult  = JsonPath.<List<Map<String, Object>>>read(jsonAsString, expression);
-        JSONArray consultationResult  = JsonPath.read(jsonAsString, expression);
-
+        var consultationResult  = getJsonExpressionValue(jsonArrayNode,expression);
+        log.info("La consulta devolvio : "+consultationResult);
         var isMap = consultationResult.stream().allMatch( rta -> rta instanceof Map);
 
-        return isMap ? consultationResult.stream()
-                .map(item -> ((Map<?, ?>) item)
+        return isMap
+                ? consultationResult.stream().map(item -> ((Map<?, ?>) item)
                         .values().stream()
                         .map(value -> this.arrayReqValue != null && this.arrayReqValue instanceof ReqJsonValue ?
                                 ((ReqJsonValue) this.arrayReqValue).getValue(value.toString()) : value.toString()) // Usar fillValue solo si subAttribute no es null
-                        .collect(Collectors.joining()))
-                .collect(Collectors.joining()) :
+                        .collect(Collectors.joining())).collect(Collectors.joining())
+                :
                 consultationResult.stream()
-                        .map(value -> this.arrayReqValue != null && this.arrayReqValue instanceof ReqJsonValue ?
-                                ((ReqJsonValue) this.arrayReqValue).getValue(value.toString()) : value.toString()).collect(Collectors.joining()) ;
+                        .map(value -> this.arrayReqValue != null && this.arrayReqValue instanceof ReqJsonValue
+                                ? ((ReqJsonValue) this.arrayReqValue).getValue(value.toString())
+                                : value.toString()).collect(Collectors.joining()) ;
 
 
     }
