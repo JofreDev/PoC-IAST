@@ -19,3 +19,5 @@ include ':reactive-web'
 project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
 include ':validation-and-homologation-service'
 project(':validation-and-homologation-service').projectDir = file('./infrastructure/driven-adapters/validation-and-homologation-service')
+include ':logging-and-monitoring-service'
+project(':logging-and-monitoring-service').projectDir = file('./infrastructure/driven-adapters/logging-and-monitoring-service')

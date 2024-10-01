@@ -26,3 +26,19 @@ cors:
 iast-pattern:
     config:
       files: "${IAST-PATTERN_CONFIG_FILE:applications/app-service/src/main/resources/pattern-config/}"
+
+#------------------------ KAFKA PROPERTIES ----------------------------------------
+
+integration:
+  bancolombia:
+    logging-adapter:
+      application: "${LOGGING-ADAPTER-APPLICATION:NU0145001_TemplateServiceToIast_MR}"
+      executionEnvironment: "${LOGGING-ADAPTER-EXECUTIONENVIRONMENT:Nube}"
+      environment: "${LOGGING-ADAPTER-ENVIRONMENT:dev}"
+      integrationPlatform: "${LOGGING-ADAPTER-INTEGRATIONPLATFORM:Spring WebFlux}"
+      serviceName: "${LOGGING-ADAPTER-SERVICENAME:template_service_to_iast}"
+      kafkaBroker: "${LOGGING-ADAPTER-KAFKABROKER:10.8.166.82:9094,10.8.166.83:9094,10.8.166.84:9094}"
+      kafkaTopic: "${LOGGING-ADAPTER-KAFKATOPIC:logs-int}"
+      kafkaErrorTopic: "${LOGGING-ADAPTER-KAFKAERRORTOPIC:logs-error-int}"
+      kafkaVersion: "${LOGGING-ADAPTER-KAFKAVERSION:1.0}"
+      securityProtocol: "${SECURITY_PROTOCOL:SSL}"

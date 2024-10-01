@@ -1,6 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+	implementation project(':logging-and-monitoring-service')
 	implementation project(':validation-and-homologation-service')
 	implementation project(':reactive-web')
 	implementation project(':iast-pattern-config')

@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework:spring-context'
+    implementation 'co.com.bancolombia:logging-adapter:1.0.8'
+}
